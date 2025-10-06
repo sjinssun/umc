@@ -6,6 +6,9 @@ import com.example.umc9th.global.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -13,6 +16,14 @@ import lombok.*;
 @Getter
 @Table(name = "review")
 public class Review extends BaseEntity {
+
+    // Review(1) : ReviewPhoto(N) 관계
+    @OneToMany(mappedBy = "review", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ReviewPhoto> reviewPhotoList = new ArrayList<>();
+
+    // Review(1) : ReviewFeedback(1) 관계
+    @OneToOne(mappedBy = "review", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private ReviewFeedback feedback;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
