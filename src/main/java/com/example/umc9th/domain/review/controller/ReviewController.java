@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/stores/{storeId}/reviews")
+@RequestMapping("reviews")
 public class ReviewController {
 
     private final ReviewService reviewService;
