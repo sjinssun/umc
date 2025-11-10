@@ -1,4 +1,9 @@
 package com.example.umc9th.global.apiPayload.code;
 
-public class BaseErrorCode {
+import org.springframework.http.HttpStatus;
+
+public interface BaseErrorCode  {
+    HttpStatus getStatus();
+    String getCode();
+    String GetMessage();
 }
