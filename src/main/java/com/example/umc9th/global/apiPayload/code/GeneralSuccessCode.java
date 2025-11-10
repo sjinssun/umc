@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 
 @Getter
 @AllArgsConstructor
-public enum GeneralSuccessCode implements BaseErrorCode {
+public enum GeneralSuccessCode implements BaseSuccessCode {
 
     // 200 OK: 요청을 성공적으로 처리했음
     OK(HttpStatus.OK,
@@ -43,7 +43,7 @@ public enum GeneralSuccessCode implements BaseErrorCode {
         return this.code;
     }
 
-    // ⭐️ 메서드 이름을 'GetMessage()'에서 'getMessage()'로 수정합니다.
+    // ⭐️ 메서드 이름을 'getMessage()'에서 'getMessage()'로 수정합니다.
     @Override
     public String getMessage() {
         return this.message;
