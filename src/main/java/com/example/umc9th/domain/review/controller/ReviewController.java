@@ -1,30 +1,42 @@
 package com.example.umc9th.domain.review.controller;
 
-import com.example.umc9th.domain.review.entity.Review;
 import com.example.umc9th.domain.review.service.ReviewService;
+import com.example.umc9th.domain.review.dto.res.ReviewResDTO;
+import com.example.umc9th.global.apiPayload.ApiResponse;
+import com.example.umc9th.global.apiPayload.code.BaseSuccessCode; // BaseSuccessCode 임포트
+import com.example.umc9th.global.apiPayload.code.GeneralSuccessCode;
+
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/stores/{storeId}/reviews")
+@RequestMapping("/reviews") // 1. ⭐️ 요청하신 대로 /reviews로 수정
 public class ReviewController {
 
     private final ReviewService reviewService;
 
     @GetMapping
-    public ResponseEntity<List<Review>> getStoreReviews(
-            @PathVariable("storeId") Long storeId,
+    public ApiResponse<List<ReviewResDTO.Reviewing>> getStoreReviews(
+            // 2. ⭐️ storeId를 @RequestParam으로 수정
+            @RequestParam(name = "storeId", required = false) Long storeId,
             @RequestParam(name = "star", required = false) Integer star) {
 
-        List<Review> reviews = reviewService.SearchByFilter(
+        // 응답 코드 정의 (워크북 스타일)
+        BaseSuccessCode code = GeneralSuccessCode.OK;
+
+        // 1. Service 호출
+        List<ReviewResDTO.Reviewing> reviews = reviewService.searchByFilter(
                 storeId,
                 star
         );
 
-        return ResponseEntity.ok(reviews);
+        // 2. ApiResponse.onSuccess(code, result) 반환
+        return ApiResponse.onSuccess(
+                code,
+                reviews
+        );
     }
 }
