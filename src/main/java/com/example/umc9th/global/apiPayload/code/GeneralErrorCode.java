@@ -41,7 +41,7 @@ public enum GeneralErrorCode implements BaseErrorCode{
 
     @Override
     public String getMessage() {
-        return "";
+        return this.message;
     }
 }
 
