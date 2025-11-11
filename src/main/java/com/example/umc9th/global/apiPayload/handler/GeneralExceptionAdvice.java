@@ -1,5 +1,4 @@
-package com.example.umc9th.global.apiPayload.exception.handler;
-// 경로는 필요에 따라 수정하세요.
+package com.example.umc9th.global.apiPayload.handler;
 
 import com.example.umc9th.global.apiPayload.ApiResponse;
 import com.example.umc9th.global.apiPayload.code.BaseErrorCode;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GeneralExceptionAdvice {
 
-    // 1. GeneralException 및 ReviewException 같은 비즈니스 예외를 처리합니다.
+    // 1. GeneralException 및 ReviewException 같은 비즈니스 예외를 처리
     @ExceptionHandler(GeneralException.class)
     public ResponseEntity<ApiResponse<Object>> handleGeneralException(GeneralException ex) {
 
@@ -27,7 +26,7 @@ public class GeneralExceptionAdvice {
                 ));
     }
 
-    // 2. 그 외의 모든 예상치 못한 서버 내부 오류(500 에러)를 처리합니다.
+    // 2. 그 외의 모든 예상치 못한 서버 내부 오류(500 에러)를 처리
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse<Object>> handleException(Exception ex) {
 

@@ -13,18 +13,17 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/reviews") // 1. ⭐️ 요청하신 대로 /reviews로 수정
+@RequestMapping("/reviews")
 public class ReviewController {
 
     private final ReviewService reviewService;
 
     @GetMapping
     public ApiResponse<List<ReviewResDTO.Reviewing>> getStoreReviews(
-            // 2. ⭐️ storeId를 @RequestParam으로 수정
             @RequestParam(name = "storeId", required = false) Long storeId,
             @RequestParam(name = "star", required = false) Integer star) {
 
-        // 응답 코드 정의 (워크북 스타일)
+        // 응답 코드 정의
         BaseSuccessCode code = GeneralSuccessCode.OK;
 
         // 1. Service 호출

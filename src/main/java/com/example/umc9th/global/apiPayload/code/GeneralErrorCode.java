@@ -29,19 +29,5 @@ public enum GeneralErrorCode implements BaseErrorCode{
     private final HttpStatus status;
     private final String code;
     private final String message;
-    @Override
-    public HttpStatus getStatus() {
-        return this.status;
-    }
-
-    @Override
-    public String getCode() {
-        return this.code;
-    }
-
-    @Override
-    public String getMessage() {
-        return this.message;
-    }
 }
 

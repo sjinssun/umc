@@ -33,19 +33,4 @@ public enum GeneralSuccessCode implements BaseSuccessCode {
     private final String code;
     private final String message;
 
-    @Override
-    public HttpStatus getStatus() {
-        return this.status;
-    }
-
-    @Override
-    public String getCode() {
-        return this.code;
-    }
-
-    // ⭐️ 메서드 이름을 'getMessage()'에서 'getMessage()'로 수정합니다.
-    @Override
-    public String getMessage() {
-        return this.message;
-    }
 }

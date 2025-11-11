@@ -1,10 +1,12 @@
 package com.example.umc9th.domain.review.service;
 
 import com.example.umc9th.domain.review.entity.Review;
+import com.example.umc9th.domain.review.exception.ReviewException;
 import com.example.umc9th.domain.review.repository.ReviewRepository;
-import com.example.umc9th.domain.review.dto.res.ReviewResDTO; // DTO import
-import com.example.umc9th.domain.review.converter.ReviewConverter; // Converter import
-
+import com.example.umc9th.domain.review.dto.res.ReviewResDTO;
+import com.example.umc9th.domain.review.converter.ReviewConverter;
+import com.example.umc9th.domain.store.repository.StoreRepository;
+import com.example.umc9th.global.apiPayload.code.GeneralErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,15 +18,20 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class ReviewService {
     private final ReviewRepository reviewRepository;
+    private final StoreRepository storeRepository;
 
     // 1. 메서드 반환 타입을 DTO 리스트로 변경합니다.
     public List<ReviewResDTO.Reviewing> searchByFilter(
             Long storeId, Integer star) {
 
-        // 2. Repository에서 엔티티 리스트를 조회합니다.
+        if ((storeId != null) && !storeRepository.existsById(storeId)) {
+            throw new ReviewException(GeneralErrorCode.NOT_FOUND);
+        }
+
+        // 4. (기존 로직) 필터링 결과가 0개인 것은 오류가 아니므로 그대로 빈 리스트 반환
         List<Review> reviewList = reviewRepository.findReviewsByStoreIdAndStarRange(storeId, star);
 
-        // 3.Converter를 사용하여 엔티티 리스트를 DTO 리스트로 변환하여 반환합니다.
+        // 5. (기존 로직) DTO로 변환
         return ReviewConverter.toReviewingList(reviewList);
 
     }
