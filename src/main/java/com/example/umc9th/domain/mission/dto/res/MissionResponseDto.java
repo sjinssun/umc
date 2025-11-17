@@ -1,20 +1,19 @@
 package com.example.umc9th.domain.mission.dto.res;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Builder
-@Getter
-@Setter
-@NoArgsConstructor
+
 public class MissionResponseDto {
+    @Builder
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class ChallengeResultDto{
         private Long userMissionId;
-        private Long missionid;
+        private Long missionId;
         private String missionTitle;
         private String status;
         private LocalDateTime createdAt;
