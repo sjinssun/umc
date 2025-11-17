@@ -17,7 +17,7 @@ import java.util.List;
 public class ReviewController {
 
     private final ReviewService reviewService;
-
+    //리뷰 조회
     @GetMapping
     public ApiResponse<List<ReviewResDTO.Reviewing>> getStoreReviews(
             @RequestParam(name = "storeId", required = false) Long storeId,

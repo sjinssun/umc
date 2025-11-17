@@ -1,5 +1,6 @@
 package com.example.umc9th.domain.review.service;
 
+import com.example.umc9th.domain.review.dto.req.ReviewCreateRequest;
 import com.example.umc9th.domain.review.entity.Review;
 import com.example.umc9th.domain.review.exception.ReviewException;
 import com.example.umc9th.domain.review.repository.ReviewRepository;
@@ -33,6 +34,19 @@ public class ReviewService {
 
         // 5. (기존 로직) DTO로 변환
         return ReviewConverter.toReviewingList(reviewList);
-
     }
+    @Transactional
+    public ReviewResDTO.Created createReview(Long storeId, ReviewCreateRequest request) {
+
+        var store = storeRepository.findById(storeId)
+                .orElseThrow(() -> new ReviewException(GeneralErrorCode.NOT_FOUND));
+
+        // ❗ 지금은 로그인 기능 없으니까 임시로 user = null 처리
+        Review review = ReviewConverter.toReview(request, store, null);
+
+        Review saved = reviewRepository.save(review);
+
+        return ReviewConverter.toCreatedDTO(saved);
+    }
+
 }

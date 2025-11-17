@@ -29,4 +29,14 @@ public class ReviewResDTO {
         // --- 3. 사진 정보 (ReviewPhoto 엔티티 기반) ---
         private List<String> reviewImageUrls;
     }
+    @Builder
+    @Getter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class Created {
+        private Long reviewId;
+        private String content;
+        private Integer star;
+        private LocalDateTime createdAt;
+    }
 }
