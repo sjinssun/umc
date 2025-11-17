@@ -14,6 +14,7 @@ public enum GeneralErrorCode implements BaseErrorCode{
     VALID_FAIL(HttpStatus.BAD_REQUEST,
             "COMMON400_2",
             "유효성 검증에 실패했습니다."),
+
     UNAUTHORIZED(HttpStatus.UNAUTHORIZED,
             "AUTH401_1",
             "인증이 필요합니다."),
@@ -26,6 +27,9 @@ public enum GeneralErrorCode implements BaseErrorCode{
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR,
             "COMMON500_1",
             "예기치 않은 서버 에러가 발생했습니다."),
+    MISSION_ALREADY_CHALLENGING(HttpStatus.BAD_REQUEST,
+            "MISSION400_1",
+            "이미 도전 중인 미션입니다."),
 
 
     ;

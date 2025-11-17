@@ -10,7 +10,6 @@ import com.example.umc9th.domain.user.entity.User;
 import java.util.List;
 import java.util.stream.Collectors;
 
-// Converter 클래스는 필드가 없으므로 별도 어노테이션이 필요 없습니다.
 public class ReviewConverter {
 
     public static ReviewResDTO.Reviewing toReviewDTO(Review reviewing){
