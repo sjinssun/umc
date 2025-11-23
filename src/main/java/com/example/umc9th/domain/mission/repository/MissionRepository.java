@@ -33,4 +33,6 @@ public interface MissionRepository extends JpaRepository<Mission, Long> {
     // List 대신 Page<DTO>를 반환하여 페이징을 처리하고, Pageable 객체를 인자로
     //Page는 데이터 외에 전체 개수, 총 페이지 수 등 페이지네이션 메타 정보를 함께 반환
     Page<UserMissionDto> findUserMissionsByUserId(@Param("userId") Long userId, Pageable pageable);
+    // 가게 id로 mission 검색
+    Page<Mission> findByStoreId(Long storeId, Pageable pageable);
 }

@@ -35,7 +35,7 @@ public class GeneralExceptionAdvice {
                 .body(ApiResponse.onFailure(code, errors));
     }
 
-    // 2. @PathVariable, @RequestParam 등의 유효성 검증 실패 처리 (추가된 부분)
+    // 2. @PathVariable, @RequestParam 등의 유효성 검증 실패 처리 (추가된 부분), page 체크 실패 포함
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<ApiResponse<Object>> handleConstraintViolationException(ConstraintViolationException ex) {
 

@@ -16,10 +16,6 @@ public class StoreExistValidator implements ConstraintValidator<ExistStore, Long
     @Override
     public boolean isValid(Long value, ConstraintValidatorContext context) {
 
-
-        System.out.println("🔥 [Validator] StoreExistValidator 실행됨");
-        System.out.println("🔥 [Validator] 전달된 storeId = " + value);
-        System.out.println("🔥 [Validator] storeRepository = " + storeRepository);
         // 1) null이면 바로 오류
         if (value == null) {
             makeError(context, "storeId는 필수 값입니다.");
