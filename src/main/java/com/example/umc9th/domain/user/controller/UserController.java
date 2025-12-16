@@ -3,12 +3,16 @@ package com.example.umc9th.domain.user.controller;
 
 import com.example.umc9th.domain.mission.dto.res.GetUserMissionResponse;
 import com.example.umc9th.domain.review.dto.UserReviewDto;
+import com.example.umc9th.domain.user.dto.UserReqDTO;
+import com.example.umc9th.domain.user.dto.UserResDTO;
+import com.example.umc9th.domain.user.service.UserCommandService;
 import com.example.umc9th.domain.user.service.UserQueryService;
 import com.example.umc9th.global.apiPayload.ApiResponse;
 import com.example.umc9th.global.apiPayload.code.GeneralSuccessCode;
 import com.example.umc9th.global.annotation.PageCheck;
 import com.example.umc9th.global.apiPayload.response.PageResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -31,6 +35,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public class UserController { // 💡 클래스 이름 변경
 
     private final UserQueryService userQueryService;
+    private final UserCommandService userCommandService;
 
     // [API 1] 내가 작성한 리뷰 목록 조회 (GET /users/{userId}/review-list)
     @Operation(summary = "내가 작성한 리뷰 목록 조회", description = "사용자가 작성한 리뷰 목록을 페이지네이션으로 조회합니다. page는 1부터 시작합니다.")
@@ -93,5 +98,20 @@ public class UserController { // 💡 클래스 이름 변경
                 PageResponse.from(pageResponse)
         );
     }
+    // 회원가입
+    @PostMapping("/signup")
+    @Operation(summary = "회원가입api")
+    public ApiResponse<String> join(@RequestBody @Valid UserReqDTO.JoinDTO request) {
+        userCommandService.joinUser(request);
+        return ApiResponse.onSuccess(GeneralSuccessCode.CREATED, "회원가입 성공!");
+    }
 
+    // 로그인
+    @PostMapping("/login")
+    @Operation(summary = "로그인api")
+    public ApiResponse<UserResDTO.LoginDTO> login(
+            @RequestBody @Valid UserReqDTO.LoginDTO dto
+    ){
+        return ApiResponse.onSuccess(GeneralSuccessCode.OK, userQueryService.login(dto));
+    }
 }
